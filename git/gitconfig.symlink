@@ -1,51 +1,65 @@
-[user]
-	name = Travers McInerney
-	email = travers@mcinerney.me
+[hub]
+protocol = https
 
-[alias]
-  a       = add -p
-  co      = checkout
-  ci      = commit -v
-  cim     = commit -m
-  st      = status -sb
-  br      = branch
-  hist    = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-  lg      = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  standup = log --since=yesterday --author='Travers McInerney'
+[credential]
+helper = /opt/boxen/bin/boxen-git-credential
 
 [core]
-	editor = vim
 	excludesfile = ~/.gitignore
+  whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  editor = vim
 
-[color]
-  diff = auto
-  status = auto
-  branch = auto
-  interactive = auto
-  ui = auto
-
-[color "status"]
-  changed = yellow
-  added = green
-  untracked = red
+[user]
+	name = Daniel Sun
+	email = hjdaniel.sun@gmail.com
 
 [difftool "sourcetree"]
-	cmd = /usr/local/bin/ksdiff -w \"$LOCAL\" \"$REMOTE\"
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 
 [mergetool "sourcetree"]
-	cmd = /usr/local/bin/ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 
 [push]
-	default = upstream
+  default = tracking
 
-[branch]
-  autosetuprebase = always
+[color]
+  ui = auto
 
-[credential]
-  helper = /opt/boxen/bin/boxen-git-credential
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
 
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
 
-[hub]
-protocol = https
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[alias]
+  c = commit -m
+  a = add -p
+  di = diff
+  dic = diff --cached
+  pl = pull
+  ps = push
+  plre = pull --rebase
+  st = status
+  out = log origin..HEAD
+  st = status
+  ci = commit
+  co = checkout
+  cp = cherry-pick
+  b = branch
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  ls = ls-files
+  ign = ls-files -o -i --exclude-standard
